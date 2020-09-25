@@ -2,13 +2,13 @@
 ; the absolute smallest real part.
 
 (define (smallest-real-part a b c)
-  (define discriminant (- (* b b) (* 4 a c)))
+  (define (discriminant) (- (* b b) (* 4 a c)))
 
   (define (real-part)
     (/ (- b) (* 2 a)))
 
   (define (is-complex?)
-    (< discriminant 0))
+    (< (discriminant) 0))
 
   (define (min-by-abs x y)
     (if (< (abs x) (abs y))
@@ -17,7 +17,7 @@
 
   (define (root operator)
     (/ (operator (- b)
-                 (sqrt discriminant))
+                 (sqrt (discriminant)))
        (* 2 a)))
 
   (define (smallest-root)
