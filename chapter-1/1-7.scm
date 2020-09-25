@@ -1,39 +1,43 @@
-; Recursively approximates the square root until the difference between the radicand and guess^2 is less than 0.001
-(define (sqrt radicand)
-  (define (sqrt-iter radicand guess)
-    (if (good-enough? radicand guess)
-        guess
-        (sqrt-iter radicand (improve radicand guess))))
+; sqrt recursively approximates the square root until the difference between
+; the radicand and guess^2 is less than 0.001.
 
-   (define (good-enough? radicand guess)
+(define (sqrt radicand)
+  (define (sqrt-iter guess)
+    (if (good-enough? guess)
+        guess
+        (sqrt-iter (improve guess))))
+
+   (define (good-enough? guess)
     (< (abs (- (* guess guess) radicand)) 0.001))
 
-  (define (improve radicand guess)
+  (define (improve guess)
     (average (/ radicand guess) guess))
 
   (define (average a b)
     (/ (+ a b) 2))
 
-    (sqrt-iter radicand 1.0))
+    (sqrt-iter 1.0))
 
-; Recursively approximates the square root until the difference between two subsequent guesses is less than 0.001
+
+; sqrt2 recursively approximates the square root until the difference between
+; two subsequent guesses is less than 0.001.
+
 (define (sqrt2 radicand)
-  (define (sqrt-iter radicand guess last-guess)
+  (define (sqrt-iter guess last-guess)
     (if (good-enough? guess last-guess)
         guess
-        (sqrt-iter radicand (improve radicand guess) guess)))
+        (sqrt-iter (improve guess) guess)))
 
   (define (good-enough? guess last-guess)
     (< (abs (- guess last-guess)) 0.001))
 
-  (define (improve radicand guess)
+  (define (improve guess)
     (average (/ radicand guess) guess))
 
   (define (average a b)
     (/ (+ a b) 2))
 
-
-  (sqrt-iter radicand 1.0 0.0))
+  (sqrt-iter 1.0 0.0))
 
 
 (sqrt 4)  ; = 2.0000000929222947 (correct)
