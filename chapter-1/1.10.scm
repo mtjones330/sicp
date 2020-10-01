@@ -5,7 +5,7 @@
         ((= x 0) (* 2 y))
         ((= y 1) 2)
         (else (A (- x 1)
-              (A x (- y 1))))))
+                 (A x (- y 1))))))
 
 
 ;;; Linear recursive process evolutions for (A 1 10), (A 2 4), and (A 3 3)
